@@ -2,14 +2,14 @@ import {usePlane} from '@react-three/cannon'
 import {  useLoader } from '@react-three/fiber'
 import { TextureLoader } from 'three/src/loaders/TextureLoader'
 import {RepeatWrapping,NearestFilter} from 'three'
-import { grassImg } from '../images'
+import { grass } from '../images'
 const Ground = () => {
 
     const [ref] = usePlane(()=>({
         rotation:[-Math.PI/2,0,0],
         position:[0,0,0]
     }))
-    const glassImgTexture = useLoader(TextureLoader, grassImg)
+    const glassImgTexture = useLoader(TextureLoader, grass)
 
     glassImgTexture.magFilter = NearestFilter
     glassImgTexture.wrapS = RepeatWrapping

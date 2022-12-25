@@ -1,16 +1,14 @@
-import {TextureLoader} from 'three'
 
-const loader = new TextureLoader()
-const dirtImg = "/images/dirt.jpg"
-const grassImg = "/images/grass.jpg"
-const glassImg = "/images/glass.png"
-const logImg = "/images/log.jpg"
-const woodImg = "/images/wood.png"
+const dirt = "/images/dirt.jpg"
+const grass = "/images/grass.jpg"
+const glass = "/images/glass.png"
+const log = "/images/log.jpg"
+const wood = "/images/wood.png"
 
 export {
-	dirtImg,
-	grassImg,
-	glassImg,
-	logImg,
-	woodImg
+	dirt,
+	grass,
+	glass,
+	log,
+	wood
 }

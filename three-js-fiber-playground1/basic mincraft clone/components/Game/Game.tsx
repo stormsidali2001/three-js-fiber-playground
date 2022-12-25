@@ -5,10 +5,12 @@ import Ground from '../Ground'
 import styles from './Game.module.css'
 import Player from '../Player'
 import FPV from '../../FPV'
+import Cubes from '../Cubes'
 
 const Game = () => {
   return (
     <div className={styles.container}>
+       
         <Canvas>
             <Sky sunPosition={[100,100,20]}/>
             <ambientLight intensity={0.5}/>
@@ -16,8 +18,10 @@ const Game = () => {
             <Physics>
                 <Ground/>
                 <Player/>
+                <Cubes/>
             </Physics>
         </Canvas>
+        <div className={styles.gameCursor}>+</div>
     </div>
   )
 }
