@@ -4,6 +4,7 @@ import { Canvas } from '@react-three/fiber'
 import Ground from '../Ground'
 import styles from './Game.module.css'
 import Player from '../Player'
+import FPV from '../../FPV'
 
 const Game = () => {
   return (
@@ -11,6 +12,7 @@ const Game = () => {
         <Canvas>
             <Sky sunPosition={[100,100,20]}/>
             <ambientLight intensity={0.5}/>
+            <FPV/>
             <Physics>
                 <Ground/>
                 <Player/>
