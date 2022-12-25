@@ -56,7 +56,7 @@ const Cube = ({position,texture}:CubeProps) => {
     const selectedTexture = cubesTextures?.find(t=>t.name === texture) ?? null
 
     //@ts-ignore
-  return <mesh ref={ref} onClick={handleCubeClick}>
+  return <mesh ref={ref}  onClick={handleCubeClick}>
             <boxBufferGeometry attach="geometry"/>
             <meshStandardMaterial attach="material"  map ={selectedTexture?.texture ?? null}/>
         </mesh>
