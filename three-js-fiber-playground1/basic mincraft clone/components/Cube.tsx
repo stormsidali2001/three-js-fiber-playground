@@ -1,12 +1,14 @@
 import { Triplet, useBox } from "@react-three/cannon"
 import { useLoader } from "@react-three/fiber";
-import { NearestFilter, RepeatWrapping, TextureLoader } from "three";
+import { useContext } from "react";
+import { NearestFilter, RepeatWrapping, Texture, TextureLoader } from "three";
 import * as textureImg from "../images";
-import useStore from "./hooks/useStore";
+import useStore, { TextureTypes } from "./hooks/useStore";
+import { useTextureContext } from "./TextureContext/context";
 
 interface CubeProps{
     position:Triplet;   
-    texture: "dirt" |"glass" | "glass" | "log" | "wood"; 
+    texture: TextureTypes; 
 }
 const Cube = ({position,texture}:CubeProps) => {
 
@@ -14,6 +16,7 @@ const Cube = ({position,texture}:CubeProps) => {
         type:"Static",
         position
     }))
+    const {cubesTextures} = useTextureContext()
     const [addCube,removeCube] = useStore((state)=>[state.addCube,state.removeCube])
 
     const handleCubeClick = (e:any)=>{
@@ -47,15 +50,15 @@ const Cube = ({position,texture}:CubeProps) => {
 
     }
 
-    const loadedTexture = useLoader(TextureLoader, textureImg[texture])
 
-    loadedTexture.magFilter = NearestFilter
-    loadedTexture.wrapS = RepeatWrapping
-    loadedTexture.wrapT = RepeatWrapping
+  
+
+    const selectedTexture = cubesTextures?.find(t=>t.name === texture) ?? null
+
     //@ts-ignore
   return <mesh ref={ref} onClick={handleCubeClick}>
             <boxBufferGeometry attach="geometry"/>
-            <meshStandardMaterial attach="material" color="red" map ={loadedTexture}/>
+            <meshStandardMaterial attach="material"  map ={selectedTexture?.texture ?? null}/>
         </mesh>
 }
 

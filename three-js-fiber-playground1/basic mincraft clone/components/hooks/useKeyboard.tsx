@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react"
 
 
 type Keys = "KeyW"  | "KeyS"  | "KeyA"  | "KeyD"  | "Space"  | "Digit1" | "Digit2" | "Digit3" | "Digit4" | "Digit5" 
+
 function actionByKey(key:Keys){
     const map =  {
         KeyW:"forward",
@@ -9,11 +10,11 @@ function actionByKey(key:Keys){
         KeyA:"left",
         KeyD:"right",
         Space:"jump",
-        Digit1:"texture1",
-        Digit2:"texture2",
-        Digit3:"texture3",
-        Digit4:"texture4",
-        Digit5:"texture5",
+        Digit1:"dirt",
+        Digit2:"glass",
+        Digit3:"grass",
+        Digit4:"log",
+        Digit5:"wood",
     }
     return map[key];
 }
@@ -24,14 +25,16 @@ export const useKeyboard = ()=>{
         left:false,
         right:false,
         jump:false,
-        texture1:false,
-        texture2:false,
-        texture3:false,
-        texture4:false,
-        texture5:false,
+        grass:false,
+        glass:false,
+        wood:false,
+        log:false,
+        dirt:false,
 
     })
+    
     const handleKeyDown = useCallback((e:any)=>{
+        console.log("action: ",e.code)
         const action = actionByKey(e.code)
         if(action){
             setActions((prev)=>({

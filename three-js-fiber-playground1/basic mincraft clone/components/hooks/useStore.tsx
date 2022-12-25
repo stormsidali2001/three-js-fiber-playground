@@ -3,26 +3,28 @@ import create from 'zustand'
 interface Cube{
     id:number;
     position:Triplet;
-    texture:textureTypes;
+    texture:TextureTypes;
 }
-type textureTypes =  "dirt" |"glass" | "glass" | "log" | "wood" 
+export type TextureTypes =  "dirt" |"grass" | "glass" | "log" | "wood" 
 interface State{
-    texture:textureTypes;
+    texture:TextureTypes;
     cubes:Cube[];
     addCube:(x:number,y:number,z:number)=>void;
     removeCube:(x:number,y:number,z:number)=>void;
+    setTexture:(t:TextureTypes)=>void;
 }
 const useStore = create<State>((set) => ({
-        texture:"dirt",
+        texture:"glass",
         cubes:[
             {
                 id:1,
                 position:[1,1,1],
-                texture:"dirt"
+                texture:"glass"
             }
         ],
         addCube:(x:number,y:number,z:number)=>{
             set((prev)=>({
+               
                 cubes:[
                     ...prev.cubes,
                     {
@@ -41,7 +43,11 @@ const useStore = create<State>((set) => ({
                 })
             }))
         },
-        setTexture:()=>{},
+        setTexture:(texture:TextureTypes)=>{
+            set((prev)=>({
+                texture
+            }))
+        },
         saveWorld:()=>{},
         resetWorld:()=>{},
 

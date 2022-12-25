@@ -3,7 +3,8 @@ import {  useLoader } from '@react-three/fiber'
 import { TextureLoader } from 'three/src/loaders/TextureLoader'
 import {RepeatWrapping,NearestFilter} from 'three'
 import { grass } from '../images'
-import useStore from './hooks/useStore'
+import useStore, { TextureTypes } from './hooks/useStore'
+import { useTextureContext } from './TextureContext/context'
 const Ground = () => {
 
     const [ref] = usePlane(()=>({
@@ -11,23 +12,22 @@ const Ground = () => {
         position:[0,0.5,0]
     }))
     const [addCube] = useStore((state)=>[state.addCube])
-    const glassImgTexture = useLoader(TextureLoader, grass)
+   
+    const {cubesTextures} = useTextureContext()
 
-    glassImgTexture.magFilter = NearestFilter
-    glassImgTexture.wrapS = RepeatWrapping
-    glassImgTexture.wrapT = RepeatWrapping
-    glassImgTexture.repeat.set(100,100)
+   
 
     const handleGroundClick = (e:any)=>{
       e.stopPropagation()
       const [x,y,z] = Object.values(e.point).map((v)=>Math.ceil(v as number))
       addCube(x,y,z)
     }
+    const selectedTexture = cubesTextures?.find(t=>t.name === "grass") ?? null
   return (
     //@ts-ignore
     <mesh ref={ref} onClick={handleGroundClick}>
         <planeBufferGeometry attach="geometry" args={[100,100]}/>
-        <meshStandardMaterial attach="material" map={glassImgTexture}/>
+        <meshStandardMaterial attach="material" map={selectedTexture?.texture}/>
     </mesh>
   )
 }
