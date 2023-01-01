@@ -10,6 +10,7 @@ import TextureSelector from '../TextureSelector/TextureSelector'
 import { NearestFilter, RepeatWrapping, Texture, TextureLoader } from 'three'
 import {dirt,glass,wood,grass,log} from "../../images"
 import { TextureProvider } from '../TextureContext/context'
+import usePeriodicSave from '../hooks/usePeriodicSave'
 function applyFiltersToTexture(t:Texture){
     // t.magFilter = NearestFilter
     // t.wrapS = RepeatWrapping
@@ -18,7 +19,8 @@ function applyFiltersToTexture(t:Texture){
 }
 const Game = () => {
   
-    
+  usePeriodicSave()
+  
   return (
     <div className={styles.container}>
           <Canvas>
