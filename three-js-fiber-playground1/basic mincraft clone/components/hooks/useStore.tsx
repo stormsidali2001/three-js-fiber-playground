@@ -21,8 +21,11 @@ interface State{
     updatePlayerPos:(t:Triplet)=>void;
     updatePlayerVel:(t:Triplet)=>void;
     setApi:(api:PublicApi)=>void;
+    saveWorld:()=>void;
+    loadWorld:()=>void;
 }
-const useStore = create<State>((set) => ({
+
+const useStore = create<State>((set,get) => ({
         texture:"glass",
         player:{
             position:[0,0,0],
@@ -87,8 +90,27 @@ const useStore = create<State>((set) => ({
                 }
             }))
         },
-        saveWorld:()=>{},
-        resetWorld:()=>{},
+        saveWorld:()=>{
+            const state = get()
+            const world =  JSON.stringify({player:state.player,cubes:state.cubes})
+            localStorage.setItem("mincraft:world",world)
+
+        },
+        loadWorld:()=>{
+            const worldStr = localStorage.getItem("mincraft:world")
+            const world = worldStr!= null ?JSON.parse(worldStr):null
+            if(!world) return
+           
+            world.player.api = null
+           
+            set(()=>({
+                player:world.player,
+                cubes:world.cubes
+            }))
+        },
+        resetWorld:()=>{
+
+        },
 
 }))
 
