@@ -7,33 +7,38 @@ import useStore from './hooks/useStore'
 const JUMP_FORCE = 4
 const SPEED = 4
 const Player = () => {
+    const worldStr = localStorage.getItem("world")
+    const world = worldStr!= null ?JSON.parse(worldStr):null
     const {camera} = useThree()
     const [ref,api] = useSphere(()=>({
         mass:1,
         type:"Dynamic",
-        position:[0,0,1],
-    }))
+        position:world ?world.player.position:[0,0,1],
+        velocity:world ?world.player.velocity:[0,0,0],
+    }),world)
 
     const actions = useKeyboard()
 
-    const [updatePlayerPos,updatePlayerVel,position,velocity,setApi] = useStore(state=>[state.updatePlayerPos,state.updatePlayerVel,state.player.position,state.player.velocity,state.setApi])
+    const [updatePlayerPos,updatePlayerVel,position,velocity,setApi,storApi] = useStore(state=>[state.updatePlayerPos,state.updatePlayerVel,state.player.position,state.player.velocity,state.setApi,state.player.api])
     useEffect(()=>{
+       
         setApi(api)
     },[api])
     
     useEffect(()=>{
         //the postion variable gets the value of the physical sphere
-        api.position.subscribe((p)=>{
+        api?.position.subscribe((p)=>{
+
             updatePlayerPos(p)
         })
-    },[api.position])
+    },[api?.position])
 
     useEffect(()=>{
         //the postion variable gets the value of the physical sphere
         api.velocity.subscribe((p)=>{
             updatePlayerVel(p)
         })
-    },[api.velocity])
+    },[api?.velocity])
 
     useFrame(()=>{
         //camera follows the position variable -> the physical sphere
