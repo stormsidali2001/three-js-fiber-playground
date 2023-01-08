@@ -13,22 +13,34 @@ const Player = () => {
     const [ref,api] = useSphere(()=>({
         mass:1,
         type:"Dynamic",
+<<<<<<< HEAD
         position:
         // world ?world.player.position:
         [0,5,2],
         velocity:
         // world ?world.player.velocity:
         [0,0,0],
+=======
+        position:world ?world.player.position:[0,0,1],
+        velocity:world ?world.player.velocity:[0,0,0],
+>>>>>>> 24c566799e465c751e4f6ed5e7ee9e9cd59fb7b2
     }),world)
 
     const actions = useKeyboard()
 
     const [updatePlayerPos,updatePlayerVel,position,velocity,setApi,storApi] = useStore(state=>[state.updatePlayerPos,state.updatePlayerVel,state.player.position,state.player.velocity,state.setApi,state.player.api])
     useEffect(()=>{
+<<<<<<< HEAD
 
         setApi(api)
     },[api])
 
+=======
+       
+        setApi(api)
+    },[api])
+    
+>>>>>>> 24c566799e465c751e4f6ed5e7ee9e9cd59fb7b2
     useEffect(()=>{
         //the postion variable gets the value of the physical sphere
         api?.position.subscribe((p)=>{

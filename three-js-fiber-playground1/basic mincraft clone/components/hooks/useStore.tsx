@@ -5,6 +5,7 @@ interface Cube{
     position:Triplet;
     texture:TextureTypes;
 }
+<<<<<<< HEAD
 interface Ground{
 
    cubes:Cube[];
@@ -13,13 +14,22 @@ interface Player{
     position:Triplet;
     velocity:Triplet;
     api:PublicApi | null;
+=======
+interface Player{
+    position:Triplet;
+    velocity:Triplet;
+    api:PublicApi | null
+>>>>>>> 24c566799e465c751e4f6ed5e7ee9e9cd59fb7b2
 }
 export type TextureTypes =  "dirt" |"grass" | "glass" | "log" | "wood" 
 interface State{
     texture:TextureTypes;
     cubes:Cube[];
     player:Player;
+<<<<<<< HEAD
     ground:Ground;
+=======
+>>>>>>> 24c566799e465c751e4f6ed5e7ee9e9cd59fb7b2
     addCube:(x:number,y:number,z:number)=>void;
     removeCube:(x:number,y:number,z:number)=>void;
     setTexture:(t:TextureTypes)=>void;
@@ -30,6 +40,7 @@ interface State{
     loadWorld:()=>void;
 }
 
+<<<<<<< HEAD
 const generateGround = ()=>{
     const cubes:Cube[] = [];
 
@@ -49,6 +60,12 @@ const useStore = create<State>((set,get) => ({
         texture:"glass",
         player:{
             position:[0,5,0],
+=======
+const useStore = create<State>((set,get) => ({
+        texture:"glass",
+        player:{
+            position:[0,0,0],
+>>>>>>> 24c566799e465c751e4f6ed5e7ee9e9cd59fb7b2
             velocity:[0,0,0],
             api:null
         },
@@ -59,9 +76,12 @@ const useStore = create<State>((set,get) => ({
                 texture:"glass"
             }
         ],
+<<<<<<< HEAD
         ground:{
             cubes:generateGround()
         },
+=======
+>>>>>>> 24c566799e465c751e4f6ed5e7ee9e9cd59fb7b2
         setApi:(api:PublicApi)=>{
             set((prev)=>({
                 player:{
