@@ -1,4 +1,3 @@
-import { Texture } from "three"
 import Cube from "./Cube"
 import useStore, { TextureTypes } from "./hooks/useStore"
 

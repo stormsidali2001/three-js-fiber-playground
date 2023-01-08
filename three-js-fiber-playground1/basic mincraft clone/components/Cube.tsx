@@ -14,10 +14,10 @@ const Cube = ({position,texture}:CubeProps) => {
 
     const [ref] = useBox(()=>({
         type:"Static",
-        position
+        position,
     }))
     const {cubesTextures} = useTextureContext()
-    const [addCube,removeCube] = useStore((state)=>[state.addCube,state.removeCube])
+    const [addCube,removeCube,updatePlayerPos,playerApi] = useStore((state)=>[state.addCube,state.removeCube,state.updatePlayerPos,state.player.api])
 
     const handleCubeClick = (e:any)=>{
         if(!ref.current ) return;
@@ -36,7 +36,10 @@ const Cube = ({position,texture}:CubeProps) => {
             addCube(x-1,y,z)
         }
         else if(clickedSide === 2){
-            addCube(x,y+1,z)
+            if(!playerApi) return
+            updatePlayerPos([x,y+4,z])
+            playerApi.position.set(x,y+3,z)
+             addCube(x,y+1,z)
         }
         else if(clickedSide === 3){
             addCube(x,y-1,z)
