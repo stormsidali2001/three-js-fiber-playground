@@ -16,11 +16,7 @@ const Ground = () => {
    
 
 
-    const handleGroundClick = (e:any)=>{
-      e.stopPropagation()
-      const [x,y,z] = Object.values(e.point).map((v)=>Math.ceil(v as number))
-      addCube(x,y,z)
-    }
+  
   return (
     <>
       {
